@@ -4,16 +4,18 @@
  */
 package view;
 
+import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellEditor;
 import javax.swing.table.TableColumn;
-import model.Record;
+import model.BillManager;
+import model.Record;;
 
 /**
  *
  * @author Administrator
  */
 public class Main extends javax.swing.JFrame {
-    
+    private BillManager bill=new BillManager();
 
     private void loginAccount() {
         Auth loginForm = new Auth(this, true);
@@ -31,8 +33,20 @@ public class Main extends javax.swing.JFrame {
         Record r9=new Record("胡浩然","雪碧","2","1","2");
         Record r10=new Record("胡浩然","空调","20000","1","20000");
         Record r11=new Record("胡浩然","洗头膏","46","1","46");
+        bill.addRecord(r1);
+        bill.addRecord(r2);
+        bill.addRecord(r3);
+        bill.addRecord(r4);
+        bill.addRecord(r5);
+        bill.addRecord(r6);
+        bill.addRecord(r7);
+        bill.addRecord(r8);
+        bill.addRecord(r9);
+        bill.addRecord(r10);
+        bill.addRecord(r11);
     }
     public Main() {
+        MyInit();
         initComponents();
         loginAccount();
     }
@@ -117,7 +131,10 @@ public class Main extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        mainDataForm.setModel(new tableModel());
+        mainDataForm.setModel(new DefaultTableModel(0,5));
+        mainDataForm.setEnabled(false);
+        bill.setHead((DefaultTableModel)mainDataForm.getModel());
+        bill.loadRaw((DefaultTableModel)mainDataForm.getModel(), bill.getBill());
         jScrollPane1.setViewportView(mainDataForm);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -129,7 +146,7 @@ public class Main extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(personName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
@@ -185,7 +202,7 @@ public class Main extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(455, 455, 455)
                 .addComponent(jLabel3)
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

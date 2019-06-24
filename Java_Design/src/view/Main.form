@@ -76,6 +76,7 @@
   <SyntheticProperties>
     <SyntheticProperty name="menuBar" type="java.lang.String" value="jMenuBar1"/>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
+    <SyntheticProperty name="generateCenter" type="boolean" value="false"/>
   </SyntheticProperties>
   <AuxValues>
     <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
@@ -280,7 +281,7 @@
                         </Property>
                       </Properties>
                       <AuxValues>
-                        <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="mainDataForm.setModel(new tableModel());"/>
+                        <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="mainDataForm.setModel(new DefaultTableModel(0,5));&#xd;&#xa;mainDataForm.setEnabled(false);&#xd;&#xa;bill.setHead((DefaultTableModel)mainDataForm.getModel());&#xd;&#xa;bill.loadRaw((DefaultTableModel)mainDataForm.getModel(), bill.getBill());&#xd;&#xa;"/>
                       </AuxValues>
                     </Component>
                   </SubComponents>

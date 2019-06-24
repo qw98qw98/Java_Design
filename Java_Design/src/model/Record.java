@@ -5,7 +5,6 @@
 package model;
 
 import java.util.Calendar;
-import java.util.Date;
 
 /**
  *
@@ -18,14 +17,14 @@ public class Record {
     private String name;
     private String spend;
     private String amount;
-    private String price;
+    private String totalprice;
     
-    public Record(String consumer, String name, String spend, String amount, String price) {
+    public Record(String consumer, String name, String spend, String amount, String totalprice) {
         this.consumer = consumer;
         this.name = name;
         this.spend = spend;
         this.amount = amount;
-        this.price = price;
+        this.totalprice = totalprice;
     }
 
     public String getAmount() {
@@ -60,12 +59,12 @@ public class Record {
         this.name = name;
     }
 
-    public String getPrice() {
-        return price;
+    public String getTotalprice() {
+        return totalprice;
     }
 
-    public void setPrice(String price) {
-        this.price = price;
+    public void setTotalprice(String totalprice) {
+        this.totalprice = totalprice;
     }
 
     public String getSpend() {
