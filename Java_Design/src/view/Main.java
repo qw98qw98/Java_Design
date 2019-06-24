@@ -19,14 +19,18 @@ import model.Record;
  * @author Administrator
  */
 public class Main extends javax.swing.JFrame {
-
+    
     private BillManager bill = new BillManager();
-
+    
     private void loginAccount() {
         Auth loginForm = new Auth(this, true);
         loginForm.setVisible(true);
     }
-
+    
+    public BillManager getBill() {
+        return bill;
+    }
+    
     private void MyInit() {
         Record r1 = new Record("胡浩然", "牙膏", "10", "1", "10");
         Record r2 = new Record("胡浩然", "电风扇", "20", "1", "20");
@@ -51,7 +55,7 @@ public class Main extends javax.swing.JFrame {
         bill.addRecord(r10);
         bill.addRecord(r11);
     }
-
+    
     public Main() {
         MyInit();
         initComponents();
@@ -98,11 +102,9 @@ public class Main extends javax.swing.JFrame {
         name = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu4 = new javax.swing.JMenu();
-        jMenu1 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenuItem3 = new javax.swing.JMenuItem();
-        jMenuItem5 = new javax.swing.JMenuItem();
+        jMenu1 = new javax.swing.JMenu();
         jSeparator1 = new javax.swing.JPopupMenu.Separator();
         jMenuItem4 = new javax.swing.JMenuItem();
 
@@ -382,26 +384,21 @@ public class Main extends javax.swing.JFrame {
         jTabbedPane2.addTab("宿舍消费管理系统", jPanel1);
 
         jMenu4.setText("功能");
+
+        jMenuItem2.setText("消费");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
+        jMenu4.add(jMenuItem2);
+
+        jMenuItem3.setText("消费统计");
+        jMenu4.add(jMenuItem3);
+
         jMenuBar1.add(jMenu4);
 
         jMenu1.setText("帮助");
-
-        jMenuItem1.setText("查询消费");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
-            }
-        });
-        jMenu1.add(jMenuItem1);
-
-        jMenuItem2.setText("进行消费");
-        jMenu1.add(jMenuItem2);
-
-        jMenuItem3.setText("统计消费");
-        jMenu1.add(jMenuItem3);
-
-        jMenuItem5.setText("管理消费");
-        jMenu1.add(jMenuItem5);
         jMenu1.add(jSeparator1);
 
         jMenuItem4.setText("退出");
@@ -437,10 +434,6 @@ public class Main extends javax.swing.JFrame {
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem4ActionPerformed
-
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void personNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_personNameActionPerformed
         // TODO add your handling code here:
@@ -499,6 +492,12 @@ public class Main extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_nameActionPerformed
 
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        Consume consume = new Consume(this, true);
+        consume.setParent(this);
+        consume.setVisible(true);        
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -534,7 +533,7 @@ public class Main extends javax.swing.JFrame {
          * Create and display the form
          */
         java.awt.EventQueue.invokeLater(new Runnable() {
-
+            
             @Override
             public void run() {
                 new Main().setVisible(true);
@@ -556,11 +555,9 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuBar jMenuBar2;
-    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
-    private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
