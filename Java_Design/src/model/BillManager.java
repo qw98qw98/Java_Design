@@ -26,13 +26,13 @@ public class BillManager {
     public Vector getBill() {
         return Bill;
     }
-
+    
     public void loadRaw(DefaultTableModel TB, Vector bill) {
         for (Object object : bill) {
             Record r = (Record) object;
             String name = r.getName();
-            SimpleDateFormat  sf=new SimpleDateFormat("yyyy-mm-dd");
-            String date=sf.format(r.getDate().getTime());
+            SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
+            String date = sf.format(r.getDate().getTime());
             String spend = r.getSpend();
             String amount = r.getAmount();
             String totalprice = r.getTotalprice();
@@ -42,11 +42,11 @@ public class BillManager {
     }
 
     public void setHead(DefaultTableModel TB) {
-        TB.setColumnIdentifiers(new String[] {"日期","购买物品","购买数量","花费"});
+        TB.setColumnIdentifiers(new String[]{"日期", "购买物品", "购买数量", "花费"});
     }
 
     public Vector serachName(String name) {
-        return seracher.serachName(Bill,name);
+        return seracher.serachName(Bill, name);
     }
 
     public Vector serachYear(String year) {
@@ -69,6 +69,7 @@ class Serach {
         for (Object e : bill) {
             Record record = (Record) e;
             if (record.getName().equals(name)) {
+                System.out.println(record.getName().equals(name)    );
                 re.add(e);
             }
         }

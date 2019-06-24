@@ -4,35 +4,41 @@
  */
 package view;
 
+import java.awt.event.ItemEvent;
+import java.util.Vector;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellEditor;
 import javax.swing.table.TableColumn;
 import model.BillManager;
-import model.Record;;
+import model.Record;
+
+;
 
 /**
  *
  * @author Administrator
  */
 public class Main extends javax.swing.JFrame {
-    private BillManager bill=new BillManager();
+
+    private BillManager bill = new BillManager();
 
     private void loginAccount() {
         Auth loginForm = new Auth(this, true);
         loginForm.setVisible(true);
     }
-    private void MyInit(){
-        Record r1=new Record("胡浩然","牙膏","10","1","10");
-        Record r2=new Record("胡浩然","电风扇","20","1","20");
-        Record r3=new Record("胡浩然","Java并发艺术","80","1","80");
-        Record r4=new Record("胡浩然","JavaScript Dom编程艺术","50","1","50");
-        Record r5=new Record("胡浩然","耳机","25","2","50");
-        Record r6=new Record("胡浩然","扇子","30","1","30");
-        Record r7=new Record("胡浩然","可乐","5","1","5");
-        Record r8=new Record("胡浩然","农夫山泉","2","1","2");
-        Record r9=new Record("胡浩然","雪碧","2","1","2");
-        Record r10=new Record("胡浩然","空调","20000","1","20000");
-        Record r11=new Record("胡浩然","洗头膏","46","1","46");
+
+    private void MyInit() {
+        Record r1 = new Record("胡浩然", "牙膏", "10", "1", "10");
+        Record r2 = new Record("胡浩然", "电风扇", "20", "1", "20");
+        Record r3 = new Record("胡浩然", "Java并发艺术", "80", "1", "80");
+        Record r4 = new Record("胡浩然", "JavaScript Dom编程艺术", "50", "1", "50");
+        Record r5 = new Record("胡浩然", "耳机", "25", "2", "50");
+        Record r6 = new Record("胡浩然", "扇子", "30", "1", "30");
+        Record r7 = new Record("胡浩然", "可乐", "5", "1", "5");
+        Record r8 = new Record("胡浩然", "农夫山泉", "2", "1", "2");
+        Record r9 = new Record("胡浩然", "雪碧", "2", "1", "2");
+        Record r10 = new Record("胡浩然", "空调", "20000", "1", "20000");
+        Record r11 = new Record("胡浩然", "洗头膏", "46", "1", "46");
         bill.addRecord(r1);
         bill.addRecord(r2);
         bill.addRecord(r3);
@@ -45,6 +51,7 @@ public class Main extends javax.swing.JFrame {
         bill.addRecord(r10);
         bill.addRecord(r11);
     }
+
     public Main() {
         MyInit();
         initComponents();
@@ -98,7 +105,12 @@ public class Main extends javax.swing.JFrame {
 
         jLabel1.setText("成员姓名：");
 
-        personName.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "请选择成员", "胡浩然", "--", "--", "--", "--", "--" }));
+        personName.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "请选择成员", "胡浩然", "邵靖宸", "王伯彭", "张瀚文", "韩世杰" }));
+        personName.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                personNameItemStateChanged(evt);
+            }
+        });
         personName.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 personNameActionPerformed(evt);
@@ -134,7 +146,6 @@ public class Main extends javax.swing.JFrame {
         mainDataForm.setModel(new DefaultTableModel(0,5));
         mainDataForm.setEnabled(false);
         bill.setHead((DefaultTableModel)mainDataForm.getModel());
-        bill.loadRaw((DefaultTableModel)mainDataForm.getModel(), bill.getBill());
         jScrollPane1.setViewportView(mainDataForm);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -279,14 +290,24 @@ public class Main extends javax.swing.JFrame {
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem4ActionPerformed
-    
+
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem1ActionPerformed
-    
+
     private void personNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_personNameActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_personNameActionPerformed
+
+    private void personNameItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_personNameItemStateChanged
+        if(evt.getStateChange()==ItemEvent.SELECTED){
+            DefaultTableModel df = (DefaultTableModel) mainDataForm.getModel();
+            mainDataForm.setModel(new DefaultTableModel(0,5));
+            String name = (String) evt.getItem();
+            Vector data = bill.serachName(name);
+            bill.loadRaw((DefaultTableModel) mainDataForm.getModel(), bill.getBill());
+    }//GEN-LAST:event_personNameItemStateChanged
+    }
 
     /**
      * @param args the command line arguments
@@ -323,7 +344,7 @@ public class Main extends javax.swing.JFrame {
          * Create and display the form
          */
         java.awt.EventQueue.invokeLater(new Runnable() {
-            
+
             @Override
             public void run() {
                 new Main().setVisible(true);
