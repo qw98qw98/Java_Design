@@ -6,6 +6,7 @@ package view;
 
 import javax.swing.table.TableCellEditor;
 import javax.swing.table.TableColumn;
+import model.Record;
 
 /**
  *
@@ -18,8 +19,18 @@ public class Main extends javax.swing.JFrame {
         Auth loginForm = new Auth(this, true);
         loginForm.setVisible(true);
     }
-    private void setColumn(){
-      
+    private void MyInit(){
+        Record r1=new Record("胡浩然","牙膏","10","1","10");
+        Record r2=new Record("胡浩然","电风扇","20","1","20");
+        Record r3=new Record("胡浩然","Java并发艺术","80","1","80");
+        Record r4=new Record("胡浩然","JavaScript Dom编程艺术","50","1","50");
+        Record r5=new Record("胡浩然","耳机","25","2","50");
+        Record r6=new Record("胡浩然","扇子","30","1","30");
+        Record r7=new Record("胡浩然","可乐","5","1","5");
+        Record r8=new Record("胡浩然","农夫山泉","2","1","2");
+        Record r9=new Record("胡浩然","雪碧","2","1","2");
+        Record r10=new Record("胡浩然","空调","20000","1","20000");
+        Record r11=new Record("胡浩然","洗头膏","46","1","46");
     }
     public Main() {
         initComponents();
@@ -43,7 +54,7 @@ public class Main extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox();
+        personName = new javax.swing.JComboBox();
         jScrollPane1 = new javax.swing.JScrollPane();
         mainDataForm = new javax.swing.JTable();
         jPanel3 = new javax.swing.JPanel();
@@ -73,10 +84,10 @@ public class Main extends javax.swing.JFrame {
 
         jLabel1.setText("成员姓名：");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "请选择成员", "胡浩然", "--", "--", "--", "--", "--" }));
-        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+        personName.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "请选择成员", "胡浩然", "--", "--", "--", "--", "--" }));
+        personName.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox1ActionPerformed(evt);
+                personNameActionPerformed(evt);
             }
         });
 
@@ -117,7 +128,7 @@ public class Main extends javax.swing.JFrame {
                 .addGap(28, 28, 28)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(personName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -129,7 +140,7 @@ public class Main extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(personName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 466, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -256,9 +267,9 @@ public class Main extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem1ActionPerformed
     
-    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+    private void personNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_personNameActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox1ActionPerformed
+    }//GEN-LAST:event_personNameActionPerformed
 
     /**
      * @param args the command line arguments
@@ -303,7 +314,6 @@ public class Main extends javax.swing.JFrame {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JMenu jMenu1;
@@ -325,5 +335,6 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JTabbedPane jTabbedPane2;
     private javax.swing.JTable mainDataForm;
+    private javax.swing.JComboBox personName;
     // End of variables declaration//GEN-END:variables
 }

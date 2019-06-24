@@ -15,17 +15,30 @@ public class tableModel implements TableModel {
 
     @Override
     public int getRowCount() {
-         return 29;
+        return 29;
     }
 
     @Override
     public int getColumnCount() {
-         return 5;
+        return 5;
     }
 
     @Override
     public String getColumnName(int columnIndex) {
-         return " 第"+columnIndex+"列名";
+        switch (columnIndex) {
+            case 0:
+                return "购买日期";
+            case 1:
+                return "购买物品";
+            case 2:
+                return "购买人";
+            case 3:
+                return "购买数量";
+            case 4:
+                return "购买花费";
+            default:
+                throw new AssertionError();
+        }
     }
 
     @Override
@@ -49,6 +62,20 @@ public class tableModel implements TableModel {
     @Override
     public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
         String s = "Change at: " + rowIndex + "--- " + columnIndex + " newValue: " + aValue;
+                switch (columnIndex) {
+            case 0:
+                return "购买日期";
+            case 1:
+                return "购买物品";
+            case 2:
+                return "购买人";
+            case 3:
+                return "购买数量";
+            case 4:
+                return "购买花费";
+            default:
+                throw new AssertionError();
+        }
         System.out.println(s);
     }
 

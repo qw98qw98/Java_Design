@@ -16,11 +16,11 @@ public class Record {
     private Calendar date=Calendar.getInstance();
     private String consumer;
     private String name;
-    private double spend;
+    private String spend;
     private String amount;
     private String price;
     
-    public Record(String consumer, String name, double spend, String amount, String price) {
+    public Record(String consumer, String name, String spend, String amount, String price) {
         this.consumer = consumer;
         this.name = name;
         this.spend = spend;
@@ -68,11 +68,11 @@ public class Record {
         this.price = price;
     }
 
-    public double getSpend() {
+    public String getSpend() {
         return spend;
     }
 
-    public void setSpend(double spend) {
+    public void setSpend(String spend) {
         this.spend = spend;
     }
 }
