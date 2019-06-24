@@ -26,23 +26,25 @@ public class BillManager {
     public Vector getBill() {
         return Bill;
     }
-    
+
     public void loadRaw(DefaultTableModel TB, Vector bill) {
         for (Object object : bill) {
             Record r = (Record) object;
-            String name = r.getName();
             SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
             String date = sf.format(r.getDate().getTime());
+            String name = r.getName();
             String spend = r.getSpend();
             String amount = r.getAmount();
             String totalprice = r.getTotalprice();
-            String[] obj = {date, name, amount, totalprice};
+            String price=r.getSpend();
+            String consumer=r.getConsumer();
+            String[] obj = {date, name, amount, totalprice,price,consumer};
             TB.addRow(obj);
         }
     }
 
     public void setHead(DefaultTableModel TB) {
-        TB.setColumnIdentifiers(new String[]{"日期", "购买物品", "购买数量", "花费"});
+        TB.setColumnIdentifiers(new String[]{"日期", "购买物品", "购买数量", "花费", "单价", "购买者"});
     }
 
     public Vector serachName(String name) {
@@ -50,15 +52,19 @@ public class BillManager {
     }
 
     public Vector serachYear(String year) {
-        return seracher.serachName(Bill, year);
+        return seracher.serachYear(Bill, year);
     }
 
     public Vector serachMonth(String month) {
-        return seracher.serachName(Bill, month);
+        return seracher.serachMonth(Bill, month);
     }
 
     public Vector serachDay(String day) {
-        return seracher.serachName(Bill, day);
+        return seracher.serachDay(Bill, day);
+    }
+
+    public Vector serachConsumer(String name) {
+        return seracher.serachConsumer(Bill, name);
     }
 }
 
@@ -69,18 +75,30 @@ class Serach {
         for (Object e : bill) {
             Record record = (Record) e;
             if (record.getName().equals(name)) {
-                System.out.println(record.getName().equals(name)    );
                 re.add(e);
             }
         }
         return re;
     }
 
-    public Vector serachDay(Vector bill, int day) {
+    public Vector serachConsumer(Vector bill, String pname) {
         Vector re = new Vector();
         for (Object e : bill) {
             Record record = (Record) e;
-            if (record.getDate().get(Calendar.DATE) == day) {
+            if (record.getConsumer().equals(pname)) {
+                re.add(e);
+            }
+        }
+        return re;
+    }
+
+    public Vector serachDay(Vector bill, String day) {
+        Vector re = new Vector();
+        for (Object e : bill) {
+            Record record = (Record) e;
+            int cl = record.getDate().get(Calendar.DATE);
+            String sday = Integer.toString(cl);
+            if (sday.equals(day)) {
                 re.add(e);
             }
         }
@@ -88,27 +106,29 @@ class Serach {
 
     }
 
-    public Vector serachMonth(Vector bill, int month) {
+    public Vector serachMonth(Vector bill, String month) {
         Vector re = new Vector();
         for (Object e : bill) {
             Record record = (Record) e;
-            if (record.getDate().get(Calendar.MONTH) == month) {
+            int cl = record.getDate().get(Calendar.MONTH) + 1;
+            String smonth = Integer.toString(cl);
+            if (smonth.equals(month)) {
                 re.add(e);
             }
         }
         return re;
-
     }
 
-    public Vector serachYear(Vector bill, int year) {
+    public Vector serachYear(Vector bill, String year) {
         Vector re = new Vector();
         for (Object e : bill) {
             Record record = (Record) e;
-            if (record.getDate().get(Calendar.YEAR) == year) {
+            int cl = record.getDate().get(Calendar.YEAR);
+            String syear = Integer.toString(cl);
+            if (syear.equals(year)) {
                 re.add(e);
             }
         }
         return re;
-
     }
 }
