@@ -4,9 +4,11 @@
  */
 package view;
 
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
+import java.awt.event.KeyEvent;
 import java.util.Vector;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellEditor;
@@ -19,18 +21,18 @@ import model.Record;
  * @author Administrator
  */
 public class Main extends javax.swing.JFrame {
-    
+
     private BillManager bill = new BillManager();
-    
+
     private void loginAccount() {
         Auth loginForm = new Auth(this, true);
         loginForm.setVisible(true);
     }
-    
+
     public BillManager getBill() {
         return bill;
     }
-    
+
     private void MyInit() {
         Record r1 = new Record("胡浩然", "牙膏", "10", "1", "10");
         Record r2 = new Record("胡浩然", "电风扇", "20", "1", "20");
@@ -55,11 +57,12 @@ public class Main extends javax.swing.JFrame {
         bill.addRecord(r10);
         bill.addRecord(r11);
     }
-    
+
     public Main() {
         MyInit();
         initComponents();
         loginAccount();
+        this.pack();
     }
 
     /**
@@ -105,6 +108,7 @@ public class Main extends javax.swing.JFrame {
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenuItem3 = new javax.swing.JMenuItem();
         jMenu1 = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
         jSeparator1 = new javax.swing.JPopupMenu.Separator();
         jMenuItem4 = new javax.swing.JMenuItem();
 
@@ -115,6 +119,7 @@ public class Main extends javax.swing.JFrame {
         jMenuBar2.add(jMenu3);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setIconImage(Toolkit.getDefaultToolkit().createImage(getClass().getResource("/src/users.png")));
 
         jLabel3.setFont(new java.awt.Font("宋体", 0, 14)); // NOI18N
         jLabel3.setText("消费管理系统");
@@ -175,7 +180,7 @@ public class Main extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(personName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
             .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 584, Short.MAX_VALUE)
         );
         jPanel2Layout.setVerticalGroup(
@@ -192,6 +197,12 @@ public class Main extends javax.swing.JFrame {
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "消费查询"));
 
         jLabel2.setText("输入查询年:");
+
+        yeartext.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                yeartextKeyPressed(evt);
+            }
+        });
 
         year.setText("查询");
         year.addActionListener(new java.awt.event.ActionListener() {
@@ -236,6 +247,11 @@ public class Main extends javax.swing.JFrame {
                 monthActionPerformed(evt);
             }
         });
+        month.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                monthKeyPressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
@@ -266,6 +282,12 @@ public class Main extends javax.swing.JFrame {
         jTabbedPane1.addTab("月查询", jPanel6);
 
         jLabel5.setText("输入查询日:");
+
+        daytext.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                daytextKeyPressed(evt);
+            }
+        });
 
         day.setText("查询");
         day.addActionListener(new java.awt.event.ActionListener() {
@@ -305,6 +327,12 @@ public class Main extends javax.swing.JFrame {
         jTabbedPane1.addTab("日查询", jPanel7);
 
         jLabel6.setText("输入想查询的物品:");
+
+        nametext.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                nametextKeyPressed(evt);
+            }
+        });
 
         name.setText("查询");
         name.addActionListener(new java.awt.event.ActionListener() {
@@ -399,6 +427,14 @@ public class Main extends javax.swing.JFrame {
         jMenuBar1.add(jMenu4);
 
         jMenu1.setText("帮助");
+
+        jMenuItem1.setText("关于");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem1);
         jMenu1.add(jSeparator1);
 
         jMenuItem4.setText("退出");
@@ -428,7 +464,8 @@ public class Main extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        pack();
+        java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
+        setBounds((screenSize.width-1159)/2, (screenSize.height-827)/2, 1159, 827);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
@@ -473,13 +510,7 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_dayActionPerformed
 
     private void yearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_yearActionPerformed
-        DefaultTableModel df = (DefaultTableModel) mainDataForm.getModel();
-        String year = yeartext.getText();
-        Vector data = bill.serachYear(year);
-        df.setRowCount(0);
-        if (!data.isEmpty()) {
-            bill.loadRaw((DefaultTableModel) mainDataForm.getModel(), data);
-        }
+        yearConsole();
     }//GEN-LAST:event_yearActionPerformed
 
     private void nameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nameActionPerformed
@@ -495,8 +526,66 @@ public class Main extends javax.swing.JFrame {
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
         Consume consume = new Consume(this, true);
         consume.setParent(this);
-        consume.setVisible(true);        
+        consume.setVisible(true);
     }//GEN-LAST:event_jMenuItem2ActionPerformed
+
+    private void yeartextKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_yeartextKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            yearConsole();
+        }
+    }
+
+    private void yearConsole() {
+        DefaultTableModel df = (DefaultTableModel) mainDataForm.getModel();
+        String year = yeartext.getText();
+        Vector data = bill.serachYear(year);
+        df.setRowCount(0);
+        if (!data.isEmpty()) {
+            bill.loadRaw((DefaultTableModel) mainDataForm.getModel(), data);
+        }
+    }//GEN-LAST:event_yeartextKeyPressed
+
+    private void monthKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_monthKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            DefaultTableModel df = (DefaultTableModel) mainDataForm.getModel();
+            String month = monthtext.getText();
+            Vector data = bill.serachMonth(month);
+            df.setRowCount(0);
+            if (!data.isEmpty()) {
+                bill.loadRaw((DefaultTableModel) mainDataForm.getModel(), data);
+            }
+        }
+
+    }//GEN-LAST:event_monthKeyPressed
+
+    private void daytextKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_daytextKeyPressed
+
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            DefaultTableModel df = (DefaultTableModel) mainDataForm.getModel();
+            String day = daytext.getText();
+            Vector data = bill.serachDay(day);
+            df.setRowCount(0);
+            if (!data.isEmpty()) {
+                bill.loadRaw((DefaultTableModel) mainDataForm.getModel(), data);
+            }
+        }
+    }//GEN-LAST:event_daytextKeyPressed
+
+    private void nametextKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_nametextKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            DefaultTableModel df = (DefaultTableModel) mainDataForm.getModel();
+            String day = daytext.getText();
+            Vector data = bill.serachDay(day);
+            df.setRowCount(0);
+            if (!data.isEmpty()) {
+                bill.loadRaw((DefaultTableModel) mainDataForm.getModel(), data);
+            }
+        }
+    }//GEN-LAST:event_nametextKeyPressed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -533,7 +622,7 @@ public class Main extends javax.swing.JFrame {
          * Create and display the form
          */
         java.awt.EventQueue.invokeLater(new Runnable() {
-            
+
             @Override
             public void run() {
                 new Main().setVisible(true);
@@ -555,6 +644,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuBar jMenuBar2;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;

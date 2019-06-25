@@ -135,7 +135,8 @@ public class Consume extends javax.swing.JDialog {
                 .addContainerGap(13, Short.MAX_VALUE))
         );
 
-        pack();
+        java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
+        setBounds((screenSize.width-307)/2, (screenSize.height-261)/2, 307, 261);
     }// </editor-fold>//GEN-END:initComponents
 
     private void consumerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_consumerActionPerformed
